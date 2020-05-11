@@ -29,7 +29,7 @@ function getAverageMark(marks){
         averageMark[0] = `Вы ввели больше пяти оценок. Средний бал будет вычислен только для первых пяти из введеных.`;
     }
     else {
-        averageMark[0] = `Средний бал вычислен введеных оценок.`;
+        averageMark[0] = `Средний бал вычислен для введеных оценок.`;
         countMarks = marks.length;
     }
     for (i = 0; i < countMarks; i++) {
