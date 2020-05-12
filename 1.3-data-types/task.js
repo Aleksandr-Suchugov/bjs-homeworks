@@ -1,5 +1,5 @@
+"use strict"
 function calculateTotalMortgage(percent, contribution, amount, date) {
-    "use strict"
     let loanRate = parseInt(percent) / 100;
     let firstPayment = parseInt(contribution);
     let objectPrice = parseInt(amount);
@@ -17,7 +17,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
         let annuityPayment = loanParams.loanAmount * loanRate / 12 * (1 + 1 / (Math.pow(1 + loanRate / 12, loanParams.monthsCount) - 1));
         loanParams.fullCostOfFunds = (annuityPayment * loanParams.monthsCount).toFixed(2);
         
-        totalAmount = loanParams.fullCostOfFunds;
+        totalAmount = parseFloat(loanParams.fullCostOfFunds);
     }
     else {
         totalAmount = 'Неверный формат даты. Дату необходимо указать в следующем формате - ДД.ММ.ГГГГ.'
@@ -28,10 +28,10 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 function getGreeting(name) {
     let greeting = 0;
     if (name) {
-        greeting = `Привет, мир! Меня зовут ${name}.`;
+        greeting = `Привет, мир! Меня зовут ${name}`;
     }
     else {
-        greeting = `Привет, мир! Меня зовут Аноним.`;
+        greeting = `Привет, мир! Меня зовут Аноним`;
     }
     return greeting;
 }
