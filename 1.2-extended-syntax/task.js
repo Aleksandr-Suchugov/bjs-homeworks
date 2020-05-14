@@ -10,11 +10,9 @@ function getResult(a,b,c){
     if (discriminant > 0) {
         equationResult[0] = parseInt((( -b + Math.sqrt(discriminant)) / (2 * a)).toFixed(0));
         equationResult[1] = parseInt((( -b - Math.sqrt(discriminant)) / (2 * a)).toFixed(0));
-        return equationResult;
     }
     else if (discriminant === 0) {
         equationResult[0] = -b / (2 * a);
-        return equationResult;
     }
     return equationResult;
 }
