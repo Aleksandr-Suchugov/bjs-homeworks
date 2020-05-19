@@ -6,7 +6,7 @@ function getAnimalSound(animal) {
     else {
         sound = null;
     }
-    animalSound = sound;
+    let animalSound = sound;
     return animalSound;
 }
 

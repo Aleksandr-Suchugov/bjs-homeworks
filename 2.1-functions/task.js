@@ -11,8 +11,8 @@ function getSolutions(a,b,c) {
         return equationResult;
     }
     if (discriminant > 0) {
-        equationResult.roots[0] = parseInt((( -b + Math.sqrt(discriminant)) / (2 * a)).toFixed(0));
-        equationResult.roots[1] = parseInt((( -b - Math.sqrt(discriminant)) / (2 * a)).toFixed(0));
+        equationResult.roots[0] = ( -b + Math.sqrt(discriminant)) / (2 * a);
+        equationResult.roots[1] = ( -b - Math.sqrt(discriminant)) / (2 * a);
     }
     else if (discriminant === 0) {
         equationResult.roots[0] = -b / (2 * a);
@@ -59,9 +59,8 @@ function getAverageScore(data) {
     for (let i = 0; i < Object.keys(data).length; i++){
       allMarks[i] = data[Object.keys(data)[i]];
     }
-    let averageScore = {average: getAverageMark(allMarks.flat())};  //объект со средним баллом по всем оценкам. в автотесте у вас средний бал от средних значений по предметам. если всегда брать среднее знаение от средних значений, то успеваемость студента будет сремиться к нулю.
-    let output = Object.assign(averageForSubject, averageScore);
-    return output;
+    averageForSubject['average'] = getAverageMark(allMarks.flat());
+    return averageForSubject;
 }  
 
 function getDecodedValue(secret) {
