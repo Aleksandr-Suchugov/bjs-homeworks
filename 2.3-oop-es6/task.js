@@ -132,20 +132,52 @@ class StormStaff extends Staff {
 
 //task #3
 
-class StudentLog {
-    constructor(name, surname) {
-        this.name = name;
-        this.surname = surname;
+class Journal {
+    constructor(subject) {
+      this.subject = [];
     }
-    
-    getName() {
-        return console.log(`${this.name} ${this.surname}`);
-    }
-    
+  
     addGrade(grade, subject) {
-        if ((grade < 1) || (grade > 5) || (typeof grade !== "number")) {
-            console.log(`Вы пытались поставить оценку "${grade!}" по предмету "${subject}". Допускаются только числа от 1 до 5.`)
-        }
-        
-    }   
-}
+          if ((grade < 1) || (grade > 5) || (typeof grade !== "number")) {
+              console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.`)
+              return 0;
+          }
+          this.subject.push(grade);
+          return this.subject.length;
+      }   
+  
+      getAverageBySubject(subject) {
+          let averageMark = 0;
+          if (this[subject] !== undefined) {
+              if (this.subject.length > 0) {
+                  let sum = 0;
+                  for (let i = 0; i < this.subject.length; i++) {
+                      sum = sum + this.subject[i];
+                  }
+                  averageMark = sum / this.subject.length;
+                  return averageMark;
+              }
+          }
+          return averageMark;
+      }
+  
+      getTotalAverage() {
+          let allMarks = []
+          for (let i = 0; i < Object.keys(this).length; i++){
+              allMarks[i] = this[Object.keys(this)[i]];
+          }
+          averageTotal = getAverageBySubject(allMarks.flat());
+          return averageTotal;
+      }
+  }
+  
+  class StudentLog extends Journal {
+      constructor(fullName, subject) {
+        super(subject)
+          this.fullName = fullName;
+      }
+      
+      getName() {
+          return console.log(this.fullName);
+      }
+  }    
