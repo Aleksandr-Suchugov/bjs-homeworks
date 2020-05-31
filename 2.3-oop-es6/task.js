@@ -51,8 +51,8 @@ class Weapon {
 //основные классы обычного оружия 
 
 class Arm extends Weapon {
-    constructor(weaponObject) {
-        super(weaponObject)
+    constructor() {
+        super('Рука', 1, Infinity, 1)
         this.name = 'Рука';
         this.attack = 1;
         this.durability = Infinity;
@@ -61,8 +61,8 @@ class Arm extends Weapon {
 }
 
 class Bow extends Weapon {
-    constructor(weaponObject) {
-        super(weaponObject)
+    constructor() {
+        super('Лук', 10, 200, 3)
         this.name = 'Лук';
         this.attack = 10;
         this.durability = 200;
@@ -71,8 +71,8 @@ class Bow extends Weapon {
 }
 
 class Sword extends Weapon {
-    constructor(weaponObject) {
-        super(weaponObject)
+    constructor() {
+        super('Меч', 25, 500, 1)
         this.name = 'Меч';
         this.attack = 25;
         this.durability = 500;
@@ -81,8 +81,8 @@ class Sword extends Weapon {
 }
 
 class Knife extends Weapon {
-    constructor(weaponObject) {
-        super(weaponObject)
+    constructor() {
+        super('Нож', 5, 300, 1)
         this.name = 'Нож';
         this.attack = 5;
         this.durability = 300;
@@ -91,8 +91,8 @@ class Knife extends Weapon {
 }
 
 class Staff extends Weapon {
-    constructor(weaponObject) {
-        super(weaponObject)
+    constructor() {
+        super('Посох', 8, 300, 2)
         this.name = 'Посох';
         this.attack = 8;
         this.durability = 300;
@@ -103,83 +103,73 @@ class Staff extends Weapon {
 //усиленные подклассы оружия
 
 class LongBow extends Bow {
-    constructor(weaponObject) {
-        super(weaponObject)
+    constructor() {
+        super('Длинный лук', 15, 4)
         this.name = 'Длинный лук';
         this.attack = 15;
-        this.durability = weaponObject.durability;
         this.range = 4;
     }
 }
 
 class Axe extends Sword {
-    constructor(weaponObject) {
-        super(nweaponObject)
+    constructor() {
+        super('Секира', 27, 800)
         this.name = 'Секира';
         this.attack = 27;
         this.durability = 800;
-        this.range = weaponObject.range;
     }
 }
 
 class StormStaff extends Staff {
-    constructor(weaponObject) {
-        super(weaponObject)
+    constructor() {
+        super('Посох Бури', 10, 3)
         this.name = 'Посох Бури';
         this.attack = 10;
-        this.durability = weaponObject.durability;
         this.range = 3;
     }
 }
 
 //task #3
 
-class Journal {
-    constructor(subject) {
-      this.subject = [];
+class StudentLog {
+    constructor(fullName) {
+        this.fullName = fullName;
+    }
+
+    getName() {
+        return console.log(this.fullName);
     }
   
     addGrade(grade, subject) {
-          if ((grade < 1) || (grade > 5) || (typeof grade !== "number")) {
-              console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.`)
-              return 0;
-          }
-          this.subject.push(grade);
-          return this.subject.length;
+        this.fullName.subject = []; 
+        if ((grade < 1) || (grade > 5) || (typeof grade !== "number")) {
+            console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.`)
+            return 0;
+        }
+        this.fullName.subject.push(grade);
+        return this.fullName.subject.length;
       }   
   
-      getAverageBySubject(subject) {
-          let averageMark = 0;
-          if (this[subject] !== undefined) {
-              if (this.subject.length > 0) {
-                  let sum = 0;
-                  for (let i = 0; i < this.subject.length; i++) {
-                      sum = sum + this.subject[i];
-                  }
-                  averageMark = sum / this.subject.length;
-                  return averageMark;
-              }
-          }
-          return averageMark;
-      }
+    getAverageBySubject(subject) {
+        let averageMark = 0;
+        for (subject in this.fullName) {
+            if (this.fullName.subject.length > 0) {
+                let sum = 0;
+                for (let i = 0; i < this.fullName.subject.length; i++) {
+                    sum = sum + this.fullName.subject[i];
+                }   
+            averageMark = sum / this.fullName.subject.length;
+            }
+        }
+        return averageMark;
+    }
   
-      getTotalAverage() {
-          let allMarks = []
-          for (let i = 0; i < Object.keys(this).length; i++){
-              allMarks[i] = this[Object.keys(this)[i]];
-          }
-          averageTotal = getAverageBySubject(allMarks.flat());
-          return averageTotal;
-      }
-  }
-  
-  class StudentLog extends Journal {
-      constructor(fullName, subject) {
-        super(subject)
-          this.fullName = fullName;
-      }
-      
-      getName() {
-          return console.log(this.fullName);
-      }
-  }    
+    getTotalAverage() {
+        let allMarks = []
+        for (let i = 0; i < Object.keys(this.fullName).length; i++){
+            allMarks[i] = this.fullName[Object.keys(this.fullName)[i]];
+        }
+        averageTotal = getAverageBySubject(allMarks.flat());
+        return averageTotal;
+    }
+}
