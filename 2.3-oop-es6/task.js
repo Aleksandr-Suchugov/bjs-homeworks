@@ -132,42 +132,44 @@ class StormStaff extends Staff {
 //task #3
 
 class StudentLog {
+    #journal;
     constructor(fullName) {
         this.fullName = fullName;
+        this.#journal = {};
     }
-
+  
     getName() {
         return console.log(this.fullName);
     }
-  
+    
     addGrade(grade, subject) {
-        this.fullName.subject = []; 
+        this.#journal.subject = []; 
         if ((grade < 1) || (grade > 5) || (typeof grade !== "number")) {
             console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.`)
             return 0;
         }
-        this.fullName.subject.push(grade);
-        return this.fullName.subject.length;
-      }   
-  
+        this.#journal.subject.push(grade);
+        return this.#journal.subject.length;
+    }   
+    
     getAverageBySubject(subject) {
         let averageMark = 0;
-        for (subject in this.fullName) {
-            if (this.fullName.subject.length > 0) {
+        for (subject in this.#journal) {
+            if (this.#journal.subject.length > 0) {
                 let sum = 0;
-                for (let i = 0; i < this.fullName.subject.length; i++) {
-                    sum = sum + this.fullName.subject[i];
+                for (let i = 0; i < this.#journal.subject.length; i++) {
+                    sum = sum + this.#journal.subject[i];
                 }   
-            averageMark = sum / this.fullName.subject.length;
+            averageMark = sum / this.#journal.subject.length;
             }
         }
         return averageMark;
     }
-  
+    
     getTotalAverage() {
         let allMarks = []
-        for (let i = 0; i < Object.keys(this.fullName).length; i++){
-            allMarks[i] = this.fullName[Object.keys(this.fullName)[i]];
+        for (let i = 0; i < Object.keys(this.#journal).length; i++){
+            allMarks[i] = this.#journal[Object.keys(this.#journal)[i]];
         }
         averageTotal = getAverageBySubject(allMarks.flat());
         return averageTotal;
