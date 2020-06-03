@@ -3,48 +3,48 @@
 class Weapon {
     #originDurability;
     #originAttack;
-      constructor(weaponObject) {
-          this.name = weaponObject.name;
-          this.attack = weaponObject.attack;
-          this.durability = weaponObject.durability;
-          this.range = weaponObject.range;
-          this.#originDurability = weaponObject.durability;
-          this.#originAttack = weaponObject.attack;
-      }
+    constructor(weaponObject) {
+        this.name = weaponObject.name;
+        this.attack = weaponObject.attack;
+        this.durability = weaponObject.durability;
+        this.range = weaponObject.range;
+        this.#originDurability = weaponObject.durability;
+        this.#originAttack = weaponObject.attack;
+    }
   
-      takeDamage(damage) {
-          this.durability = this.durability - damage;
-          if (this.durability < 0) {
-              this.durability = 0;
-          }
-          return this.durability;
-      }
+    takeDamage(damage) {
+        this.durability = this.durability - damage;
+        if (this.durability < 0) {
+            this.durability = 0;
+        }
+        return this.durability;
+    }
   
-      getDamage() {
-          if (this.durability < (0.3 * this.#originDurability)) {
-              this.attack = 0.5 * this.#originAttack;
-          }
-          if (this.durability === 0) {
-              this.attack = 0;
-          }
-          return this.attack;
-      }
+    getDamage() {
+        if (this.durability === 0) {
+            this.attack = 0;
+        }
+        else if (this.durability < (0.3 * this.#originDurability)) {
+            this.attack = this.#originAttack / 2;
+        }
+        return this.attack;
+    }
   
-      isBroken() {
+    isBroken() {
         return  this.durability > 0 ? false : true; 
-      }
+    }
   
-  }
+}
   
-  const arm = new Weapon({name: 'Рука', attack: 1, durability: Infinity, range: 1});
-  const bow = new Weapon({name: 'Лук', attack: 10, durability: 200, range: 3});
-  const sword = new Weapon({name: 'Меч', attack: 25, durability: 500, range: 1});
-  const knife = new Weapon({name: 'Нож', attack: 5, durability: 300, range: 1});
-  const stick = new Weapon({name: 'Посох', attack: 8, durability: 300, range: 2});
+const arm = new Weapon({name: 'Рука', attack: 1, durability: Infinity, range: 1});
+const bow = new Weapon({name: 'Лук', attack: 10, durability: 200, range: 3});
+const sword = new Weapon({name: 'Меч', attack: 25, durability: 500, range: 1});
+const knife = new Weapon({name: 'Нож', attack: 5, durability: 300, range: 1});
+const stick = new Weapon({name: 'Посох', attack: 8, durability: 300, range: 2});
   
-  const longBow = new Weapon({name: 'Длинный лук', attack: 15, durability: 200, range: 4});
-  const axe = new Weapon({name: 'Секира', attack: 27, durability: 800, range: 1}); 
-  const stormStick = new Weapon({name: 'Посох Бури', attack: 10, durability: 300, range: 3});
+const longBow = new Weapon({name: 'Длинный лук', attack: 15, durability: 200, range: 4});
+const axe = new Weapon({name: 'Секира', attack: 27, durability: 800, range: 1}); 
+const stormStick = new Weapon({name: 'Посох Бури', attack: 10, durability: 300, range: 3});
 
 //task #2
 
