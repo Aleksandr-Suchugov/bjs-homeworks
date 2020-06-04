@@ -134,44 +134,51 @@ class StormStaff extends Staff {
 class StudentLog {
     #journal;
     constructor(fullName) {
-        this.fullName = fullName;
+        this.name = fullName;
         this.#journal = {};
     }
   
     getName() {
-        return console.log(this.fullName);
+        return console.log(this.name);
     }
     
     addGrade(grade, subject) {
-        this.#journal.subject = []; 
         if ((grade < 1) || (grade > 5) || (typeof grade !== "number")) {
             console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.`)
             return 0;
         }
-        this.#journal.subject.push(grade);
-        return this.#journal.subject.length;
+        if (this.#journal[subject] === undefined) {
+            this.#journal[subject] = [];
+        }
+        (this.#journal[subject]).push(grade);
+        return (this.#journal[subject]).length;
     }   
     
     getAverageBySubject(subject) {
         let averageMark = 0;
-        for (subject in this.#journal) {
-            if (this.#journal.subject.length > 0) {
+        if (this.#journal[subject] != undefined) {
+            if ((this.#journal[subject]).length > 0) {
                 let sum = 0;
-                for (let i = 0; i < this.#journal.subject.length; i++) {
-                    sum = sum + this.#journal.subject[i];
+                for (let i = 0; i < (this.#journal[subject]).length; i++) {
+                    sum = sum + (this.#journal[subject])[i];
                 }   
-            averageMark = sum / this.#journal.subject.length;
+            averageMark = sum / (this.#journal[subject]).length;
             }
         }
         return averageMark;
     }
     
     getTotalAverage() {
-        let allMarks = []
+        let allMarks = [];
         for (let i = 0; i < Object.keys(this.#journal).length; i++){
             allMarks[i] = this.#journal[Object.keys(this.#journal)[i]];
         }
-        averageTotal = getAverageBySubject(allMarks.flat());
+        let newArray = allMarks.flat();
+        let sum = 0;
+        for (let i = 0; i < newArray.length; i++) {
+            sum = newArray[i] + sum;
+        }
+        let averageTotal = sum / newArray.length;
         return averageTotal;
     }
 }
