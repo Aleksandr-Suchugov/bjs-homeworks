@@ -1,15 +1,15 @@
 //task #1
 
 class Weapon {
-    #originDurability;
-    #originAttack;
     constructor(weaponObject) {
         this.name = weaponObject.name;
         this.attack = weaponObject.attack;
         this.durability = weaponObject.durability;
         this.range = weaponObject.range;
-        this.#originDurability = weaponObject.durability;
-        this.#originAttack = weaponObject.attack;
+    }
+
+    static durabilityMinThreshold() {
+        return (0.3 * this.durability);
     }
   
     takeDamage(damage) {
@@ -22,12 +22,11 @@ class Weapon {
   
     getDamage() {
         if (this.durability === 0) {
-            this.attack = 0;
+            return 0;
         }
-        else if (this.durability < (0.3 * this.#originDurability)) {
-            this.attack = this.#originAttack / 2;
+        else if (this.durability < this.durabilityMinThreshold()) {
+            return this.attack / 2;
         }
-        return this.attack;
     }
   
     isBroken() {
@@ -139,7 +138,7 @@ class StudentLog {
     }
   
     getName() {
-        return console.log(this.name);
+        return this.name;
     }
     
     addGrade(grade, subject) {
