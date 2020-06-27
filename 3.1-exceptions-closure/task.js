@@ -27,7 +27,7 @@ class Triangle {
     }
 
     [triangleValidityTest]() {
-        if (((this.leftSide + this.rightSide) < this.basicSide) || ((this.leftSide + this.basicSide) < this.rightSide) || ((this.rightSide + this.basicSide) < this.leftSide)) {
+        if ((this.leftSide + this.rightSide) < this.basicSide) {
         throw 'Треугольник с такими сторонами не существует';
         }
     }  
@@ -37,11 +37,11 @@ class Triangle {
     }
 
     getArea() {
-        return (0.25 * Math.sqrt(4 * Math.pow(this.leftSide, 2) * Math.pow(this.rightSide, 2) - Math.pow(Math.pow(this.leftSide, 2) + Math.pow(this.rightSide, 2) - Math.pow(this.basicSide, 2), 2))).toFixed(3);
+        return Math.sqrt(0.5 * this.getPerimeter() * (0.5 * this.getPerimeter() - this.leftSide) * (0.5 * this.getPerimeter() - this.rightSide) * (0.5 * this.getPerimeter() - this.basicSide)).toFixed(3);
     }
 }
 
-getTriangle(a, b, c) {
+function getTriangle(a, b, c) {
     try {
         return new Triangle(a, b, c);   
     }
