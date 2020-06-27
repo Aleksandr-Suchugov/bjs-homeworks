@@ -26,8 +26,8 @@ class Triangle {
         this.basicSide = c;
     }
 
-    ["triangle_test"]() {
-        if (((this.leftSide + this.rightSide) < this.basicSide) || ((this.leftSide + this.basicSide) < this.rightSide) || ((this.rightSide + this.basicSide) < this.leftSide) {
+    [triangleValidityTest]() {
+        if (((this.leftSide + this.rightSide) < this.basicSide) || ((this.leftSide + this.basicSide) < this.rightSide) || ((this.rightSide + this.basicSide) < this.leftSide)) {
         throw 'Треугольник с такими сторонами не существует';
         }
     }  
@@ -48,3 +48,4 @@ getTriangle(a, b, c) {
     catch(err) {
         console.warn("Ошибка! Треугольник не существует");
     }
+}
