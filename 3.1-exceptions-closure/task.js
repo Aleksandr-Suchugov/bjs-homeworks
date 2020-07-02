@@ -1,11 +1,10 @@
 // task #1
 
 function parseCount(value) {
-    const digitValue = Number.parseInt(value, 10);
-    if ((digitValue === NaN) || (digitValue === undefined) || (digitValue === null)) {
-        throw 'Невалидное значение';
+    if (Number.parseInt(value, 10)) {
+        return Number.parseInt(value, 10);
     }
-    return digitValue;
+    throw new Error("Невалидное значение");
 }
 
 function validateCount(value) {
@@ -13,7 +12,7 @@ function validateCount(value) {
         return parseCount(value);
     }
     catch(err) {
-        console.warn(err);
+        return err;
     }
 }
 
@@ -25,27 +24,28 @@ class Triangle {
         this.rightSide = b;
         this.basicSide = c;
     }
-
-    [triangleValidityTest]() {
-        if ((this.leftSide + this.rightSide) < this.basicSide) {
-        throw 'Треугольник с такими сторонами не существует';
-        }
-    }  
     
     getPerimeter() {
         return this.leftSide + this.rightSide + this.basicSide;
     }
 
     getArea() {
-        return Math.sqrt(0.5 * this.getPerimeter() * (0.5 * this.getPerimeter() - this.leftSide) * (0.5 * this.getPerimeter() - this.rightSide) * (0.5 * this.getPerimeter() - this.basicSide)).toFixed(3);
+        const halfPerimeter = 0.5 * this.getPerimeter();
+        return parseFloat(Math.sqrt(halfPerimeter * (halfPerimeter - this.leftSide) * (halfPerimeter - this.rightSide) * (halfPerimeter - this.basicSide)).toFixed(3));
     }
 }
 
 function getTriangle(a, b, c) {
     try {
-        return new Triangle(a, b, c);   
+        if (((a + b) < c) && ((a + c) < b) && ((c + b) < a)) {
+            throw 'Треугольник с такими сторонами не существует';
+            }
+        const varifiedTriangle = new Triangle(a, b, c);
+        return varifiedTriangle;   
     }
     catch(err) {
-        console.warn("Ошибка! Треугольник не существует");
+        varifiedTriangle.getArea() = "Ошибка! Неправильный треугольник";
+        varifiedTriangle.getPerimeter() = "Ошибка! Неправильный треугольник";
+        return varifiedTriangle;
     }
 }
