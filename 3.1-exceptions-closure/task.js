@@ -1,8 +1,9 @@
 // task #1
 
 function parseCount(value) {
-    if (Number.parseInt(value, 10)) {
-        return Number.parseInt(value, 10);
+    const number = Number.parseInt(value, 10);
+    if (number) {
+        return number;
     }
     throw new Error("Невалидное значение");
 }
@@ -20,6 +21,9 @@ function validateCount(value) {
 
 class Triangle {
     constructor(a, b, c) {
+        if (((a + b) < c) || ((a + c) < b) || ((c + b) < a)) {
+            throw new Error('Треугольник с такими сторонами не существует');
+            }
         this.leftSide = a;
         this.rightSide = b;
         this.basicSide = c;
@@ -37,15 +41,13 @@ class Triangle {
 
 function getTriangle(a, b, c) {
     try {
-        if (((a + b) < c) && ((a + c) < b) && ((c + b) < a)) {
-            throw 'Треугольник с такими сторонами не существует';
-            }
         const varifiedTriangle = new Triangle(a, b, c);
         return varifiedTriangle;   
     }
     catch(err) {
-        varifiedTriangle.getArea() = "Ошибка! Неправильный треугольник";
-        varifiedTriangle.getPerimeter() = "Ошибка! Неправильный треугольник";
-        return varifiedTriangle;
+        const dummyTriangle = new Triangle(a, b, c);
+        dummyTriangle.getArea = function() {"Ошибка! Неправильный треугольник";};
+        dummyTriangle.getPerimeter = function() {"Ошибка! Неправильный треугольник";};
+        return dummyTriangle;
     }
 }
