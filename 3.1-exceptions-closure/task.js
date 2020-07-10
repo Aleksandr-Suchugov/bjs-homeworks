@@ -41,13 +41,12 @@ class Triangle {
 
 function getTriangle(a, b, c) {
     try {
-        const varifiedTriangle = new Triangle(a, b, c);
-        return varifiedTriangle;   
+        return new Triangle(a, b, c);   
     }
     catch(err) {
-        const dummyTriangle = new Triangle(a, b, c);
-        dummyTriangle.getArea = function() {"Ошибка! Неправильный треугольник";};
-        dummyTriangle.getPerimeter = function() {"Ошибка! Неправильный треугольник";};
+        const dummyTriangle = new Object();
+        dummyTriangle.getArea = function() {return "Ошибка! Неправильный треугольник";};
+        dummyTriangle.getPerimeter = function() {return "Ошибка! Неправильный треугольник";};
         return dummyTriangle;
     }
 }
